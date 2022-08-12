@@ -1,8 +1,8 @@
-package com.mindtree.service;
+package com.mindtree.dao;
 
 import com.mindtree.entity.Product;
 
-public interface ProductService {
+public interface ProductDao {
 
 	Product findByProductId(Integer productId);
 

@@ -20,7 +20,7 @@ public class MyCart {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
-     @OneToOne(cascade =CascadeType.ALL)
+     @OneToOne(cascade =CascadeType.PERSIST)
      private User user;
     
      @OneToMany(mappedBy = "cart")

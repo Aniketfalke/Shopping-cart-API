@@ -22,12 +22,12 @@ public class CartItem {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer cartIteamId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cart_id",referencedColumnName = "cartId")
 	@JsonBackReference
     private MyCart cart;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="product_id",referencedColumnName = "productId")
 	private Product product;
 	
