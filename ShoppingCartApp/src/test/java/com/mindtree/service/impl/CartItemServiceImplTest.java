@@ -15,13 +15,7 @@ class CartItemServiceImplTest {
     private CartItemServiceImpl cartItemService;
      
     @Test
-
     void saveCartItem() {
-        //Mockito.when(this.cartItemService).thenReturn(new CartItem(1,));
-        assertTrue(true);
-    }
-    @Test
-    void saveCartItem_WithoutImput() {
         //Mockito.when(this.cartItemService).thenReturn(new CartItem(1,));
         assertTrue(true);
     }
