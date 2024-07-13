@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +31,9 @@ public class CartController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = MyCart.class)) })})
 	@PostMapping("/save/{id}")
-	public MyCart saveCart(@RequestBody MyCart cart,@PathVariable ("id") Integer userId) {
-		
-		return cartService.saveCart(cart,userId);
+	public ResponseEntity<MyCart> saveCart(@RequestBody MyCart cart, @PathVariable ("id") Integer userId) {
+		MyCart cartDetails=cartService.saveCart(cart,userId);
+		return ResponseEntity.status(HttpStatus.CREATED).body(cartDetails);
 	}
 	@Operation(summary = "get cart detail by Id")
 	@ApiResponses(value = {
@@ -39,8 +41,10 @@ public class CartController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = MyCart.class)) })})
 	@GetMapping("/get/{id}")
-	public MyCart getCartById(@PathVariable ("id")Integer cartId) {
-		return cartService.findByCartId(cartId);
+	public ResponseEntity<MyCart> getCartById(@PathVariable ("id")Integer cartId) {
+
+		MyCart cartDetails=cartService.findByCartId(cartId);
+		return ResponseEntity.ok(cartDetails);
 	}
 	
 

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +29,9 @@ public class ProductController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@GetMapping("/get/id/{id}")
-	public Product getProductById(@PathVariable ("id")Integer productId) {
-		return productService.findByProductId(productId);
-		
+	public ResponseEntity<Product> getProductById(@PathVariable ("id")Integer productId) {
+		Product response= productService.findByProductId(productId);
+		return ResponseEntity.ok(response);
 	}
 	@Operation(summary = "Get Product by Name")
 	@ApiResponses(value = {
@@ -38,8 +39,9 @@ public class ProductController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@GetMapping("/get/name/{name}")
-	public Product getProductByName(@PathVariable ("name") String productName) {
-		return productService.findByProductName(productName);
+	public ResponseEntity<Product> getProductByName(@PathVariable ("name") String productName) {
+		Product response= productService.findByProductName(productName);
+		return ResponseEntity.ok(response);
 	}
 	@Operation(summary = "Get Product by category")
 	@ApiResponses(value = {
@@ -47,8 +49,9 @@ public class ProductController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@GetMapping("/get/category/{category}")
-	public Product getProductByCategory(@PathVariable("category") String category) {
-		return productService.findByCategory(category);
+	public ResponseEntity<Product> getProductByCategory(@PathVariable("category") String category) {
+		Product response= productService.findByCategory(category);
+		return ResponseEntity.ok(response);
 	}
 
 }

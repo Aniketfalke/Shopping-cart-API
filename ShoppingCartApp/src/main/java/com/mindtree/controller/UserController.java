@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,9 @@ public class UserController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@PostMapping("/save")
-	public User saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
+	public ResponseEntity<User> saveUser(@RequestBody User user) {
+		User userResponse =userService.saveUser(user);
+		return ResponseEntity.ok(userResponse);
 		
 	}
 	

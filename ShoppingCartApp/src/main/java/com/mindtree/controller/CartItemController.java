@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +38,10 @@ public class CartItemController {
 					content = @Content)
 	})
 	@PostMapping("cart/{cartId}/product/{productId}/add")
-	public CartItem saveCartItem(@RequestBody CartItem cartIteam,@PathVariable Integer cartId,@PathVariable("productId") Integer productId) {
+	public ResponseEntity<CartItem> saveCartItem(@RequestBody CartItem cartIteam, @PathVariable Integer cartId, @PathVariable("productId") Integer productId) {
 		
-		return cartItemService.saveCartItem(cartIteam,cartId,productId);
+		CartItem cartItemDetails=cartItemService.saveCartItem(cartIteam,cartId,productId);
+		return ResponseEntity.ok(cartItemDetails);
 		
 	}
 	@Operation(summary = "Delete specific product from the cart")
@@ -47,9 +50,10 @@ public class CartItemController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@DeleteMapping("/cart/delete/{id}")
-	public String deleteProductFromCart(@PathVariable("id") Integer productId) {
+	public ResponseEntity<String> deleteProductFromCart(@PathVariable("id") Integer productId) {
 		
-		return cartItemService.deleteProductFromCartItem(productId);
+		String response= cartItemService.deleteProductFromCartItem(productId);
+		return ResponseEntity.ok(response);
 	}
 	@Operation(summary = "Delete all product from the cart")
 	@ApiResponses(value = {
@@ -57,9 +61,9 @@ public class CartItemController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@DeleteMapping("/cart/delete/all/{cartId}")
-	public String deleteAllProductFromCart(@PathVariable Integer cartId) {
-		return cartItemService.deleteAllProductFromCartItem(cartId);
-		
+	public ResponseEntity<String> deleteAllProductFromCart(@PathVariable Integer cartId) {
+		String response= cartItemService.deleteAllProductFromCartItem(cartId);
+		return ResponseEntity.ok(response);
 	}
 
 	@Operation(summary = "Update product in cart")
@@ -68,9 +72,10 @@ public class CartItemController {
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = String.class)) })})
 	@PutMapping("/cart/update/{cartId}/product/{id}")
-	public String updateProductQuantity(@RequestBody CartItem cartItem, @PathVariable ("id") Integer ProductId,
+	public ResponseEntity<String> updateProductQuantity(@RequestBody CartItem cartItem, @PathVariable ("id") Integer ProductId,
 			@PathVariable ("cartId")Integer cartId) {
-		return cartItemService.updateProductQuantity(cartItem,cartId,ProductId);
+		String reponse =cartItemService.updateProductQuantity(cartItem,cartId,ProductId);
+		return new ResponseEntity<String>(reponse, HttpStatus.OK);
 	}
 	
 }
