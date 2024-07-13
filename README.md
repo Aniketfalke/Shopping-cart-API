@@ -4,6 +4,6 @@ To run the service locally you need to create local.properties file under resour
 -----------------------
 local.properties
 ------------------------
-dburl= ${provide your values}
-dbpassword= ${provide your values}
+dburl= ${provide your values}\
+dbpassword= ${provide your values}\
 dbusername= ${provide your values}
