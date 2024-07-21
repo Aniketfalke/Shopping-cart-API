@@ -14,8 +14,16 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class MyCart {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,45 +38,5 @@ public class MyCart {
      @Transient
      private float totalPrice;
 
-	public int getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<CartItem> getCartIteam() {
-		return cartIteam;
-	}
-
-	public void setCartIteam(List<CartItem> cartIteam) {
-		this.cartIteam = cartIteam;
-	}
-
-	public float getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(float totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	@Override
-	public String toString() {
-		return "MyCart [cartId=" + cartId + ", user=" + user + ", cartIteam=" + cartIteam + ", totalPrice=" + totalPrice
-				+ "]";
-	}
-   
-     
-     
 	
 }

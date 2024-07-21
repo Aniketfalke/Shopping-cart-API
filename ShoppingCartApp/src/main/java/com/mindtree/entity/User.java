@@ -21,8 +21,8 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String password;
-	@ElementCollection(targetClass = String.class)
-	private List<String> roles;
+	@OrderColumn
+	private String[] roles;
 
 	@Override
 	public int hashCode() {

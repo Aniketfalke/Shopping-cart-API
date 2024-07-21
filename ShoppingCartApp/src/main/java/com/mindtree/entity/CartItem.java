@@ -10,12 +10,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CartItem {
 
 	@Id
@@ -36,54 +44,4 @@ public class CartItem {
 	@Transient
 	private float subPrice;
 
-	public Integer getCartIteamId() {
-		return cartIteamId;
-	}
-
-	public void setCartIteamId(Integer cartIteamId) {
-		this.cartIteamId = cartIteamId;
-	}
-
-	public MyCart getCart() {
-		return cart;
-	}
-
-	public void setCart(MyCart cart) {
-		this.cart = cart;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public float getSubPrice() {
-		return subPrice;
-	}
-
-	public void setSubPrice(float subPrice) {
-		this.subPrice = subPrice;
-	}
-
-	@Override
-	public String toString() {
-		return "CartItem [cartIteamId=" + cartIteamId + ", cart=" + cart + ", product=" + product + ", quantity="
-				+ quantity + ", subPrice=" + subPrice + "]";
-	}
-	
-	
-	
-	
-	
 }

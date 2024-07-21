@@ -2,6 +2,7 @@ package com.mindtree.exception;
 
 
 import com.mindtree.dto.ErrorReponse;
+import com.mindtree.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,6 +61,18 @@ public class GlobalExceptionHandler {
         errorReponse.setMesssage(e.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorReponse);
+    }
+    @ExceptionHandler({UserNotCreatedException.class})
+    public ResponseEntity<ErrorReponse> userNotCreated(UserNotCreatedException e, HttpServletRequest request) {
+
+        ErrorReponse errorReponse = new ErrorReponse();
+        errorReponse.setTimstamp(System.currentTimeMillis());
+        errorReponse.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorReponse.setPath(request.getContextPath());
+        errorReponse.setMesssage(e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(errorReponse);
     }
 }
