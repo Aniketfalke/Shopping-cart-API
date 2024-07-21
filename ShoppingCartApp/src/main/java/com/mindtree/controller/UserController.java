@@ -22,7 +22,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@Operation(summary = "Delete all product from the cart")
+	@Operation(summary = "Create new User")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "",
 					content = { @Content(mediaType = "application/json",

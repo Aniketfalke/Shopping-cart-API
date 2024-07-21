@@ -1,13 +1,18 @@
 package com.mindtree.entity;
 
+import lombok.*;
+
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class User {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,41 +20,10 @@ public class User {
 	private String userName;
 	private String firstName;
 	private String lastName;
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public User(int userId, String userName, String firstName, String lastname) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastname;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastname() {
-		return lastName;
-	}
-	public void setLastname(String lastname) {
-		this.lastName = lastname;
-	}
+	private String password;
+	@ElementCollection(targetClass = String.class)
+	private List<String> roles;
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(firstName, lastName, userId, userName);
@@ -69,13 +43,5 @@ public class User {
 		return Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 				&& userId == other.userId && Objects.equals(userName, other.userName);
 	}
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastname="
-				+ lastName + "]";
-	}
-	
-	
-	
-	
+
 }
